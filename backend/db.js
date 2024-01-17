@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
 const mongoURI = 'mongodb://localhost:27017/'
-
 const connectToMongo = async () => {
     try{
         await mongoose.connect(mongoURI).then(()=>{
@@ -9,7 +8,7 @@ const connectToMongo = async () => {
             
         })
     }catch(err){
-        console.log(err)
+        console.log("err")
     }
 }
 
