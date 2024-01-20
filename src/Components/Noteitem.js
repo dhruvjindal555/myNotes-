@@ -1,15 +1,15 @@
 import React from 'react'
-
 const Noteitem = (props) => {
-    const { title, description } = props.note
+    const { note } = props;
     return (
         <>
-            <div class="card col-md-3 m-2 " >
-                <div class="card-body">
-                    <h5 class="card-title"> {title}</h5>
-                    <p class="card-text">{description}</p>
-                    {/* <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a> */}
+            <div className="card col-md-3 m-2 " >
+                <div className="card-body">
+                    <h5 className="card-title"> {note.title}</h5>
+                    <p className="card-text">{note.description}</p>
+                    {/* <a href="" className="card-link"><i className="fa-solid fa-pen-to-square"></i></a>
+                    <a href="" className="card-link"><i className="fa-solid fa-trash"></i></a> */}
+                    
                 </div>
             </div>
         </>
