@@ -102,9 +102,9 @@ export const NoteState = (props) => {
     const note={
       "_id": "65a9179dac608cfvbgaa90ewfv8b0cac",
       "user": "65a8e3316eade19f5b3d0079",
-      "title": {title},
-      "description": {description},
-      "tag": {tag},
+      "title": title,
+      "description": description,
+      "tag": tag,
       "date": "2024-01-18T12:20:45.016Z",
       "__v": 0
     }
@@ -115,7 +115,10 @@ export const NoteState = (props) => {
   const editNote =()=>{
 
   }
-  const deleteNote =()=>{
+  const deleteNote =(id)=>{
+    console.log("Deleting the note with id "+ id)
+    const newNotes = notes.filter((note)=>{return note._id!==id})
+    setNotes(newNotes)
 
   }
   return (
