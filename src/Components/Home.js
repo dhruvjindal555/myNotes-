@@ -3,12 +3,16 @@ import { Notes } from './Notes'
 import Addnote from './Addnote'
 
 const Home = () => {
+
     
+
+
     return (
         <>
-            <Addnote/>
+            <Addnote />
+            
             <div className='row d-flex justify-content-center align-items-center '>
-                <Notes/>
+                <Notes  />
             </div>
 
         </>
