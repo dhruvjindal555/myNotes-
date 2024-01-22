@@ -72,7 +72,7 @@ router.post('/login', [
             return res.status(400).json({ error: "Enter correct credentials user not exit" })
         }
 
-        const passwordCompare = bcrypt.compare(password, user.password)
+        const passwordCompare =await bcrypt.compare(password, user.password)
         if (!passwordCompare) {
             return res.status(500).json({ error: "Enter correct credentials" })
         }

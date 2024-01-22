@@ -5,6 +5,8 @@ import NoteContext from './noteContext'
 export const NoteState = (props) => {
   const host = "http://localhost:5000"
   const noteInitial = []
+  const [userDetails, setUserDetails] = useState({name:"",email:"",date:""})
+
   const [notes, setNotes] = useState(noteInitial)
 
   const getNote = async () => {
@@ -12,7 +14,7 @@ export const NoteState = (props) => {
     const response = await fetch(`${host}/api/notes/fetchallnotes`, {
       method: 'GET',
       headers: {
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVhOGUzMzE2ZWFkZTE5ZjViM2QwMDc5In0sImlhdCI6MTcwNTU2OTU5OX0.Y5JiEzRT2P_wNesUXgMd7s0qbPUZpgJODrk855tDSLw"
+        "auth-token": localStorage.getItem('token')
 
       }
     })
@@ -20,6 +22,7 @@ export const NoteState = (props) => {
 
 
     setNotes(json)
+    fetchUserDetails()
     console.log(json)
   }
   const addNote = async (title, description, tag) => {
@@ -28,7 +31,7 @@ export const NoteState = (props) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVhOGUzMzE2ZWFkZTE5ZjViM2QwMDc5In0sImlhdCI6MTcwNTU2OTU5OX0.Y5JiEzRT2P_wNesUXgMd7s0qbPUZpgJODrk855tDSLw"
+        "auth-token": localStorage.getItem('token')
 
       },
       body: JSON.stringify({ title, description, tag })
@@ -39,13 +42,13 @@ export const NoteState = (props) => {
     setNotes(notes.concat(json))
     console.log("adding a note")
   }
-  const editNote = async ({_id, title, description, tag}) => {
+  const editNote = async ({ _id, title, description, tag }) => {
     //API CALL
     const response = await fetch(`${host}/api/notes/updatenotes/${_id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVhOGUzMzE2ZWFkZTE5ZjViM2QwMDc5In0sImlhdCI6MTcwNTU2OTU5OX0.Y5JiEzRT2P_wNesUXgMd7s0qbPUZpgJODrk855tDSLw"
+        "auth-token": localStorage.getItem('token')
 
       },
       body: JSON.stringify({ title, description, tag })
@@ -63,7 +66,7 @@ export const NoteState = (props) => {
         newNotes[index].tag = tag;
         break;
       }
-      
+
     }
     setNotes(newNotes)
     console.log(notes)
@@ -75,7 +78,7 @@ export const NoteState = (props) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVhOGUzMzE2ZWFkZTE5ZjViM2QwMDc5In0sImlhdCI6MTcwNTU2OTU5OX0.Y5JiEzRT2P_wNesUXgMd7s0qbPUZpgJODrk855tDSLw"
+        "auth-token": localStorage.getItem('token')
 
       },
     })
@@ -87,8 +90,27 @@ export const NoteState = (props) => {
     setNotes(newNotes)
 
   }
+
+  const fetchUserDetails = async () => {
+    //API CALL
+    const response = await fetch(`http://localhost:5000/api/auth/getuser`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem('token')
+
+      },
+    })
+
+    const json = await response.json();
+    console.log(json)
+
+    let date = new Date(json.user.date)
+ 
+    setUserDetails({name:json.user.name,email:json.user.email,date:date.toDateString()})
+  }
   return (
-    <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, getNote }} >
+    <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, getNote, userDetails,fetchUserDetails }} >
       {props.children}
     </NoteContext.Provider>
   )

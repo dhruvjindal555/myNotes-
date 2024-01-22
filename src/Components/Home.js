@@ -2,9 +2,9 @@ import React, {  } from 'react'
 import { Notes } from './Notes'
 import Addnote from './Addnote'
 
-const Home = () => {
+const Home = (props) => {
 
-    
+    const {showAlert}=props;
 
 
     return (
@@ -12,7 +12,7 @@ const Home = () => {
             <Addnote />
             
             <div className='row d-flex justify-content-center align-items-center '>
-                <Notes  />
+                <Notes  showAlert={showAlert}/>
             </div>
 
         </>

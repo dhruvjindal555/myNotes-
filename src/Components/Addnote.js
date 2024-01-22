@@ -19,20 +19,20 @@ const Addnote = () => {
 
 
     return (
-        <div className='container my-3'>
+        <div className='container  my-3'>
             <h2>Add a note</h2>
             <form>
                 <div className="mb-3">
                     <label htmlFor="title" className="form-label">Title</label>
-                    <input type="text" className="form-control" id="title" name="title" aria-describedby="emailHelp" value={note.title} onChange={onChange} />
+                    <input type="text" className="form-control bg-secondary border-0  text-white" id="title" name="title" aria-describedby="emailHelp" value={note.title} onChange={onChange} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="description" className="form-label">Description</label>
-                    <input type="text" className="form-control" id="description" name="description" value={note.description} onChange={onChange} />
+                    <input type="text" className="form-control bg-secondary border-0  text-white" id="description" name="description" value={note.description} onChange={onChange} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="tag" className="form-label">Description</label>
-                    <input type="text" className="form-control" id="tag" name="tag" value={note.tag} onChange={onChange} />
+                    <input type="text" className="form-control bg-secondary border-0  text-white" id="tag" name="tag" value={note.tag} onChange={onChange} />
                 </div>
                 <button disabled={note.title.length<5||note.description.length<5} type="submit" className="btn btn-primary" onClick={handleclick}>Add note</button>
             </form>
