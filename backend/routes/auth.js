@@ -5,9 +5,8 @@ const { query, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const fetchuser = require('../middleware/fetchuser');
-const { default: userEvent } = require('@testing-library/user-event');
-const JWT_SECRET = "dhruvismyname"
-
+require("dotenv").config()
+const JWT_SECRET = process.env.JWT_SECRET
 router.post('/createuser', [
     query('name').isLength({ min: 3 }),
     query('email').isEmail(),
