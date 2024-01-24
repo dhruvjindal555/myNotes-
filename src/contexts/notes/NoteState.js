@@ -93,7 +93,7 @@ export const NoteState = (props) => {
 
   const fetchUserDetails = async () => {
     //API CALL
-    const response = await fetch(`${host}api/auth/getuser`, {
+    const response = await fetch(`${host}/api/auth/getuser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
