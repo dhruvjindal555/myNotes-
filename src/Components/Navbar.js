@@ -1,4 +1,4 @@
-import React, { useContext ,useEffect} from 'react'
+import React, { useContext } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import noteContext from '../contexts/notes/noteContext'
 
@@ -9,7 +9,7 @@ const Navbar = () => {
     //   }, [location]);
 
     let context = useContext(noteContext)
-    let { fetchUserDetails, userDetails } = context
+    let {  userDetails } = context
 
 
     let navigate = useNavigate()
@@ -59,6 +59,7 @@ const Navbar = () => {
                         </>
                     }
                 </div>
+                
             </div>
 
 
